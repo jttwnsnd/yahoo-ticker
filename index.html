@@ -32,13 +32,17 @@
 					</div>
 				</form>
 				<div class="btn-group spacer-racer">
-					<button class="btn btn-warning">Save</button>
-					<button class="btn btn-warning">Retrieve</button>
+					<!-- <button class="btn btn-warning saveButton">Save</button> -->
+					<button class="btn btn-default" disabled="disabled">Saved Stock Symbols</button>
+					<button class="btn btn-default savedSymbols" disabled="disabled">0</button>
+					<button class="btn btn-warning retrieveButton">Retrieve</button>
+					<button class="resetSave btn btn-danger">Reset</button>
 				</div>
 				<hr>
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
+							<th>Save</th>
 							<th>Stock Symbol</th>
 							<th>Company Name</th>
 							<th>Ask Price</th>
@@ -48,6 +52,30 @@
 					</thead>
 					<tbody class="yahoo-body">
 						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<table class="table table-striped table-bordered watch-list">
+					<thead>
+						<tr>
+							<th>Remove</th>
+							<th>Stock Symbol</th>
+							<th>Company Name</th>
+							<th>Ask Price</th>
+							<th>Bid Price</th>
+							<th>Daily Change</th>
+						</tr>
+					</thead>
+					<tbody class="watch-body">
+						<tr>
+							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
