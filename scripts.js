@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	//add a listener for the form
 	$('.yahoo-form').submit(function(){
 		//stop the form from submitting when the user pushes submit or presses enter
@@ -12,16 +11,37 @@ $(document).ready(function(){
 
 		$.getJSON(url, function(theDataJsFoundIfAny){
 			// console.log(theDataJsFoundIfAny);
-			var newHTML = '';
 			var stockInfo = theDataJsFoundIfAny.query.results.quote;
-			console.log(stockInfo);
-			newHTML = '<tr><td>' + stockInfo.Symbol + '</td>';
-			newHTML += '<td>' + stockInfo.Name + '</td>';
-			newHTML += '<td>' + stockInfo.Ask + '</td>';
-			newHTML += '<td>' + stockInfo.Bid + '</td>';
-			newHTML += '<td>' + stockInfo.Change +'</td></tr>';
+			var stockCount = theDataJsFoundIfAny.query.count;
+			var newHTML = '';
+			if(stockCount > 1){
+				for(var i = 0; i < stockInfo.length; i++){
+					newHTML += buildNewTable(stockInfo[i]);
+				}
+			}else{
+				for(var i = 0; i < stockInfo.length; i++){
+					newHTML += buildNewTable(stockInfo);
+				}
+			}
 			$('.yahoo-body').html(newHTML);
+			$('.table').DataTable();
 		});
 	});
 
 })
+
+function buildNewTable(stockInfo){
+	if(stockInfo.Change[0] == '+'){
+		var upDown = "success"; 
+	}else if(stockInfo.Change[0] == '-') {
+		var upDown = "danger";
+	}
+	var growingHTML = '';
+	//lets get rid of the row, and then use append in the build table function
+	growingHTML = '<tr><td>' + stockInfo.Symbol + '</td>';
+	growingHTML += '<td>' + stockInfo.Name + '</td>';
+	growingHTML += '<td>' + stockInfo.Ask + '</td>';
+	growingHTML += '<td>' + stockInfo.Bid + '</td>';
+	growingHTML += '<td class="'+upDown+'">' + stockInfo.Change +'</td></tr>';
+	return growingHTML;
+};
