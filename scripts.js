@@ -32,7 +32,7 @@ $(document).ready(function(){
 			$('.saveButton').click(function(){
 				content = $(this).parents('tr').children('.symbol')[0].innerHTML;
 				symbolGroup.push(content);
-				sessionStorage.setItem(symbolGroup.length, content);
+				localStorage.setItem(symbolGroup.length, content);
 				savedList.innerHTML++;
 			})
 			//retrieve button function
@@ -41,8 +41,8 @@ $(document).ready(function(){
 					alert("You have nothing saved");
 				}else{
 					var symbol = '';
-					for(var prop in sessionStorage){
-						symbol += sessionStorage[prop] + ', ';
+					for(var prop in localStorage){
+						symbol += localStorage[prop] + ', ';
 					}
 					var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20("'+ symbol +'")%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json';
 
@@ -62,9 +62,9 @@ $(document).ready(function(){
 						$('.table').DataTable();
 						$('.watch-list').css({'display':'table'});
 						$('.removeButton').click(function(){
-							for(var prop in sessionStorage){
-								if(sessionStorage[prop] === $(this).parents('tr').children('.symbol')[0].innerHTML){
-									sessionStorage.removeItem(prop);
+							for(var prop in localStorage){
+								if(localStorage[prop] === $(this).parents('tr').children('.symbol')[0].innerHTML){
+									localStorage.removeItem(prop);
 								}
 							}
 							$(this).parents('tr').remove();
@@ -78,7 +78,7 @@ $(document).ready(function(){
 			$('.resetSave').click(function(){
 				symbolGroup = [];
 
-				sessionStorage.clear();
+				localStorage.clear();
 				console.log(sessionStorage);
 				console.log(symbolGroup);
 			})
